@@ -9,5 +9,12 @@
         "axios": "^1.6.4",
         "laravel-vite-plugin": "^1.0",
         "vite": "^5.0"
+    },
+    "engines": {
+        "node": "18.x"
+    }, "functions": {
+        "api/index.php": {
+            "runtime": "vercel-php@0.7.1"
+        }
     }
 }
