@@ -6,7 +6,8 @@ use App\Http\Controllers\Api\BahanBakuController;
 use App\Http\Controllers\Api\DetailTransaksiController;
 use App\Http\Controllers\Api\PenitipController;
 use App\Http\Controllers\Api\TransaksiBahanBakuController;
-use App\Http\Controllers\Api\CustomerController;
+use App\Http\Controllers\Api\HistoriPesananController;
+use App\Http\Controllers\Api\PengeluaranLainController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +22,7 @@ use App\Http\Controllers\Api\CustomerController;
 Route::middleware('api')->group(function () {
     Route::get('/bahanbakus',[App\Http\Controllers\Api\BahanBakuController::class,'index']);
     Route::post('/bahanbakus',[App\Http\Controllers\Api\BahanBakuController::class,'store']);
-    Route::get('/bahanbakus/{id}',[App\Http\Controllers\Api\BahanBakuController::class,'show']);
+    Route::get('/bahanbakus/{nama_bahan}',[App\Http\Controllers\Api\BahanBakuController::class,'show']);
     Route::put('/bahanbakus/{id}',[App\Http\Controllers\Api\BahanBakuController::class,'update']);
     Route::delete('/bahanbakus/{id}',[App\Http\Controllers\Api\BahanBakuController::class,'destroy']);
 
@@ -37,9 +38,15 @@ Route::middleware('api')->group(function () {
     Route::put('/penitips/{id}',[App\Http\Controllers\Api\PenitipController::class,'update']);
     Route::delete('/penitips/{id}',[App\Http\Controllers\Api\PenitipController::class,'destroy']);
 
-    Route::get('/customers', [CustomerController::class, 'index']);
-    Route::get('/customers/{nama_customer}', [CustomerController::class, 'show']);
-    Route::get('customers/pembelian/{id}', [CustomerController::class, 'showPembelian']);
+    Route::get('/pengeluaranlains',[App\Http\Controllers\Api\PengeluaranLainController::class,'index']);
+    Route::post('/pengeluaranlains',[App\Http\Controllers\Api\PengeluaranLainController::class,'store']);
+    Route::get('/pengeluaranlains/{tanggal_pengeluaran}', [App\Http\Controllers\Api\PengeluaranLainController::class, 'show'])
+    ->where('tanggal_pengeluaran', '\d{4}-\d{2}-\d{2}');
+    Route::put('/pengeluaranlains/{id}',[App\Http\Controllers\Api\PengeluaranLainController::class,'update']);
+    Route::delete('/pengeluaranlains/{id}',[App\Http\Controllers\Api\PengeluaranLainController::class,'destroy']);
+
+    Route::get('/customers/historipembelian', [HistoriPesananController::class, 'showHistory']);
+    // Route::get('/customers/pembelian/{id}', [HistoriPesananController::class, 'showPembelian']);
 
     Route::get('/transaksibahanbakus',[App\Http\Controllers\Api\TransaksiBahanBakuController::class,'index']);
     Route::post('/transaksibahanbakus',[App\Http\Controllers\Api\TransaksiBahanBakuController::class,'store']);

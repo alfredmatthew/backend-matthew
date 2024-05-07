@@ -60,9 +60,9 @@ class BahanBakuController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $nama_bahan)
     {
-        $bahanbakus = BahanBaku::find($id);
+        $bahanbakus = BahanBaku::where('nama_bahan', $nama_bahan)->first();
 
         if(!is_null($bahanbakus)){
             return response([
