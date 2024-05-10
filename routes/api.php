@@ -22,6 +22,7 @@ use App\Http\Controllers\Api\AuthController;
 */
 Route::middleware('api')->group(function () {
     Route::post('/change-password', [App\Http\Controllers\Api\AuthController::class,'sendEmail']);
+    Route::post('/find-user-token', [App\Http\Controllers\Api\AuthController::class,'findUserToken']);
     Route::post('/change-password/{token}', [App\Http\Controllers\Api\AuthController::class,'changePasswordToken']);
     
     Route::get('/bahanbakus',[App\Http\Controllers\Api\BahanBakuController::class,'index']);

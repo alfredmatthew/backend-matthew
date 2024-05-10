@@ -40,11 +40,27 @@ class AuthController extends Controller
         }
     }
 
+    public function findUserToken(Request $request)
+    {
+        $token = $request->input('token'); // Retrieve token from the request body
+        $user = User::where('token', $token)->first();
+        if ($user) {
+            return response([
+                'message' => 'User ditemukan',
+                'data' => $user
+            ], 200);
+        } else {
+            return response([
+                'message' => 'User tidak ditemukan'
+            ], 400);
+        }
+    }    
+
     public function changePasswordToken(Request $request, $token)
     {
         $user = User::where('token', $token)->first();
         if ($user) {
-            $user->password = Hash::make($request->newPassword);
+            $user->password = $request->newPassword;
             $user->token = null;
             $user->save();
 
