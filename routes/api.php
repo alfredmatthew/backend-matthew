@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\PenitipController;
 use App\Http\Controllers\Api\TransaksiBahanBakuController;
 use App\Http\Controllers\Api\HistoriPesananController;
 use App\Http\Controllers\Api\PengeluaranLainController;
+use App\Http\Controllers\Api\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,9 @@ use App\Http\Controllers\Api\PengeluaranLainController;
 |
 */
 Route::middleware('api')->group(function () {
+    Route::post('/change-password', [App\Http\Controllers\Api\AuthController::class,'sendEmail']);
+    Route::post('/change-password/{token}', [App\Http\Controllers\Api\AuthController::class,'changePasswordToken']);
+    
     Route::get('/bahanbakus',[App\Http\Controllers\Api\BahanBakuController::class,'index']);
     Route::post('/bahanbakus',[App\Http\Controllers\Api\BahanBakuController::class,'store']);
     Route::get('/bahanbakus/{nama_bahan}',[App\Http\Controllers\Api\BahanBakuController::class,'show']);
