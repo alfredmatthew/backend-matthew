@@ -60,7 +60,7 @@ class AuthController extends Controller
     {
         $user = User::where('token', $token)->first();
         if ($user) {
-            $user->password = $request->newPassword;
+            $user->password = Hash::make($request->newPassword);
             $user->token = null;
             $user->save();
 
