@@ -132,7 +132,7 @@ class PenitipController extends Controller
 
         if(is_null($penitip)){
             return response([
-                'message' => 'Penitip Not Found',
+                'message' => 'Penitip Not Founds',
                 'data' => null
             ],404);
         }
